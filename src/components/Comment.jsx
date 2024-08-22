@@ -1,4 +1,5 @@
-import { style } from "./Comment.module.css"
+import React from "react"
+import style from "./Comment.module.css"
 
 export function Comment() {
     return (
@@ -7,12 +8,21 @@ export function Comment() {
             <div className={style.commentBox}>
                 <div className={style.commentContent}>
                     <header>
-
+                        <div className={style.authorAndTime}>
+                            <time title='11 de Maio as 08:13' dateTime="2022-05-11 08:13:38">Cerca de 1h atrás</time>
+                        </div>
+                        <button title="Deletar comentário">
+                            <span className="ai-trash"></span>
+                            {/* <Trash size={20} /> */}
+                        </button>
                     </header>
-                    <p></p>
+                    <p>Muito bom Devon, parabéns!! 👏👏</p>
                 </div>
                 <footer>
-                    Aplaudir
+                    <button>
+                        <i className="far fa-thumbs-down"></i>
+                        Aplaudir  <span>20</span>
+                    </button>
                 </footer>
             </div>
         </div>
