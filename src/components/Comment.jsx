@@ -1,5 +1,7 @@
 import React from "react"
 import style from "./Comment.module.css"
+import { FaRegTrashAlt } from "react-icons/fa";
+import { GoThumbsup } from "react-icons/go";
 
 export function Comment() {
     return (
@@ -12,15 +14,14 @@ export function Comment() {
                             <time title='11 de Maio as 08:13' dateTime="2022-05-11 08:13:38">Cerca de 1h atrás</time>
                         </div>
                         <button title="Deletar comentário">
-                            <span className="ai-trash"></span>
-                            {/* <Trash size={20} /> */}
+                            <FaRegTrashAlt size={22} />
                         </button>
                     </header>
                     <p>Muito bom Devon, parabéns!! 👏👏</p>
                 </div>
                 <footer>
                     <button>
-                        <i className="far fa-thumbs-down"></i>
+                        <GoThumbsup />
                         Aplaudir  <span>20</span>
                     </button>
                 </footer>
