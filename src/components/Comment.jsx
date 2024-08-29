@@ -1,4 +1,5 @@
 import React from "react"
+import { Avatar } from "./Avatar";
 import style from "./Comment.module.css"
 import { FaRegTrashAlt } from "react-icons/fa";
 import { GoThumbsup } from "react-icons/go";
@@ -6,7 +7,7 @@ import { GoThumbsup } from "react-icons/go";
 export function Comment() {
     return (
         <div className={style.comment}>
-            <img className={style.avatar} src="https://avatars.githubusercontent.com/u/137108361?v=4" />
+            <Avatar hasBorder={false}  src="https://avatars.githubusercontent.com/u/137108361?v=4" />
             <div className={style.commentBox}>
                 <div className={style.commentContent}>
                     <header>
