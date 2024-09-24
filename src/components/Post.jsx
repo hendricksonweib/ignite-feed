@@ -1,33 +1,50 @@
-import React from 'react'
-import { Comment } from './Comment'
-import { Avatar } from './Avatar'
-import style from "./Post.module.css"
+import { format, formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+import { Comment } from './Comment';
+import { Avatar } from './Avatar';
+import style from "./Post.module.css";
 
-export function Post() {
+export function Post({ author, publishedAt, content }) {
+    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+        locale: ptBR,
+    });
+
+    const publishedDateRelativetoNow = formatDistanceToNow(publishedAt, {
+        locale: ptBR,
+        addSuffix: true,
+    });
+
     return (
         <article className={style.post}>
             <header>
                 <div className={style.author}>
-                    <Avatar src="https://avatars.githubusercontent.com/u/137108361?v=4" />
+                    <Avatar src={author.avatarUrl} />
                     <div className={style.authorInfo}>
-                        <strong>Hendrickson Weib</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name} </strong>
+                        <span>{author.role} </span>
                     </div>
                 </div>
-                <time title='11 de Maio as 08:13' dateTime="2022-05-11 08:13:38">Publicado há 1h</time>
+                <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+                    {publishedDateRelativetoNow}
+                </time>
             </header>
             <div className={style.content}>
-                <p>  Fala galeraa 👋</p>
-                <p> Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-                <p>👉{" "} <a href=""> jane.design/doctorcare</a></p>
-                <p><a href="">#novoprojeto</a>{" "}
-                    <a href="">#nlw</a>{" "}
-                    <a href="">#rocketseat</a>
-                </p>
+                {content.map((line, index) => {
+                    if (line.type === "paragraph") {
+                        return <p key={index}>{line.content}</p>; // Usando a chave aqui
+                    } else if (line.type === "link") {
+                        return (
+                            <p key={index}>
+                                <a href="#">{line.content}</a>
+                            </p>
+                        ); // Corrigido para usar a condição e chave
+                    }
+                    return null; // Retorne null se não corresponder a nenhum tipo
+                })}
             </div>
 
             <form className={style.commentForm}>
-                <strong>Deice seu feedback</strong>
+                <strong>Deixe seu feedback</strong>
                 <textarea
                     placeholder='Deixe um comentário'
                 />
@@ -41,5 +58,5 @@ export function Post() {
                 <Comment />
             </div>
         </article>
-    )
+    );
 }
